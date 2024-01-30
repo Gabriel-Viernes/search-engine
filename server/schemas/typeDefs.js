@@ -1,4 +1,4 @@
-export default const typeDefs = `
+const typeDefs = `
     type User {
         _id: ID!
         username: String!
@@ -41,4 +41,4 @@ export default const typeDefs = `
         removeBook(bookId: ID!): User
     }
 `
-
+module.exports = typeDefs
