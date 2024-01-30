@@ -6,6 +6,8 @@
 
 This is a search engine where one can search and keep track of books from Google Books
 
+![example screenshot](./ss.png)
+
 # Table of Contents
 
 - [Installation](#Installation)
