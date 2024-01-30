@@ -1,5 +1,5 @@
 // see SignupForm.js for comments
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
 import { useMutation } from '@apollo/client'
@@ -13,6 +13,14 @@ const LoginForm = () => {
   const [showAlert, setShowAlert] = useState(false);
 
   const [login, { error }] = useMutation(LOGIN_USER)
+
+  useEffect(() => {
+    if(error) {
+        setShowAlert(true)
+    } else {
+        setShowAlert(false)
+    }
+  }, [error])
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -36,13 +44,6 @@ const LoginForm = () => {
 
       Auth.login(data.login.token)
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
