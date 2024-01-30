@@ -1,5 +1,5 @@
 const { User } = require('../models')
-const { signToken } = require('../utils/auth.js')
+const { signToken, AuthenticationError } = require('../utils/auth')
 
 const resolvers = {
     Query: {
@@ -36,7 +36,7 @@ const resolvers = {
             if(context.user) {
                 const updatedUser = await User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    { $push: { savedBooks, BookData } },
+                    { $push: { savedBooks: bookData } },
                     { new: true }
                 )
                 return updatedUser
@@ -46,7 +46,7 @@ const resolvers = {
         },
         removeBook: async (parent, { bookId }, context) => {
             if (context.user) {
-                const updatedUser = await User.findOneandUpdate( 
+                const updatedUser = await User.findOneAndUpdate( 
                     { _id: context.user._id },
                     { $pull: { savedBooks: { bookId }}},
                     { new: true }

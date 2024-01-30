@@ -50,7 +50,7 @@ export const REMOVE_BOOK = gql`
             email
             savedBooks {
                 bookId
-                authos
+                authors
                 image
                 description
                 title
